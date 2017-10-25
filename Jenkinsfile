@@ -3,7 +3,7 @@ pipeline {
   stages {
     stage('Functional testing') {
       steps {
-        node(label: 'swarm') {
+        node(label: 'docker-1.13') {
           script {
             try {
               def wait_time = 300
