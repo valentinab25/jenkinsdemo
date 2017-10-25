@@ -18,25 +18,20 @@ casper.on('page.error', function(msg, trace) {
 });
 
 
-var port = 80;
+var url ;
 
-if (casper.cli.has("port")) {
-port = casper.cli.get("port");
+if (casper.cli.has("url")) {
+port = casper.cli.get("url");
 }
 else {
-return -1;
+    this.echo('Error: No URL given', 'ERROR');
+    return -1;
 }
 
-var host = "localhost";
-
-if (casper.cli.has("host"))  {
-host = casper.cli.get("host");
-}
-
-casper.echo("Port"+port+" host"+host);
+casper.echo("Url is " + url);
 
 casper.test.begin('Resurrectio test', function(test) {
-   casper.start("http://" + host + ":" + port + "/");
+   casper.start("http://" + url + "/");
    casper.waitForSelector("form#add-plone-site input[type=submit][value='Create a new Plone site']",
        function success() {
            test.assertExists("form#add-plone-site input[type=submit][value='Create a new Plone site']");
