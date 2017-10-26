@@ -21,16 +21,11 @@ casper.on('page.error', function(msg, trace) {
 var url ;
 
 if (casper.cli.has("url")) {
-port = casper.cli.get("url");
-}
-else {
-    this.echo('Error: No URL given', 'ERROR');
-    return -1;
-}
-
+url = casper.cli.get("url");
+    
 casper.echo("Url is " + url);
 
-casper.test.begin('Resurrectio test', function(test) {
+casper.test.begin('Progressbar test', function(test) {
    casper.start("http://" + url + "/");
    casper.waitForSelector("form#add-plone-site input[type=submit][value='Create a new Plone site']",
        function success() {
@@ -80,5 +75,11 @@ casper.test.begin('Resurrectio test', function(test) {
 
    casper.run(function() {test.done();});
 });
+    
+}
+else {
+    this.echo('Error: No URL given', 'ERROR');
+}
+
 
 
