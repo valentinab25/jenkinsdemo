@@ -16,9 +16,9 @@ pipeline {
             }
           }
           
+          junit 'report.xml'
         }
         
-        junit 'report.xml'
       }
     }
   }
