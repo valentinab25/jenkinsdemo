@@ -57,6 +57,11 @@ casper.test.begin('Progressbar test 2', function(test) {
        function fail() {
            test.assertExists(x("//*[contains(text(), \'Welcome to Plone\')]"));
    });
+    
+   casper.wait(1000);
+   casper.then(function() {
+          this.captureSelector("screenshot1.png", "html");
+   });
    casper.waitForSelector(x("//a[normalize-space(text())='News']"),
        function success() {
            test.assertExists(x("//a[normalize-space(text())='News']"));
