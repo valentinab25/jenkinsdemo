@@ -19,6 +19,7 @@ pipeline {
           }
           
           junit 'report.xml'
+          archiveArtifacts 'screenshot1.png'
         }
         
       }
