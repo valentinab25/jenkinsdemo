@@ -7,6 +7,7 @@ pipeline {
           script {
             try {   
             checkout scm
+            sh '''env'''
             sh '''docker run -d -p 8080 -e ADDONS=eea.progressbar  --name=$BUILD_TAG-test eeacms/plone-test:4'''
             sh '''docker port $BUILD_TAG-test 8080/tcp > url.file;docker_ip=$(docker inspect -f '{{range .NetworkSettings.Networks}}{{.Gateway}}{{end}}' $BUILD_TAG-test); sed -i -e "s/0.0.0.0/${docker_ip}/g" url.file'''
             sh '''new_url=$(cat url.file);timeout 300  wget --retry-connrefused --tries=60 --waitretry=5 -q http://${new_url}/'''
